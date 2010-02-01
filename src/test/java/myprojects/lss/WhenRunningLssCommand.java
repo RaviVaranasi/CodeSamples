@@ -32,7 +32,7 @@ public class WhenRunningLssCommand {
 		LssCommand lssCommand = new LssCommand(fileNames);
 		HashMultimap<String, MatchedResult> map = lssCommand.execute();
 		assertEquals(3, map.keySet().size());
-		assertThat(lssCommand.missingSequences(), JUnitMatchers.hasItems(12, 31));
+		assertThat(lssCommand.missingSequences(), JUnitMatchers.hasItems(122));
 	}
 
 }

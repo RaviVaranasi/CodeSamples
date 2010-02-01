@@ -53,7 +53,6 @@ public class LssCommand {
 				missingSequence.add(each.getSequenceNumber());
 		}
 		Collections.sort(missingSequence);
-		System.out.println(missingSequence);
 		return new  MissingSequenceFinder(5).missingNumbers(missingSequence);
 	}
 

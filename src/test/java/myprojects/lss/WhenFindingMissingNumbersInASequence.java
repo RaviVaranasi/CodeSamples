@@ -1,5 +1,6 @@
 package myprojects.lss;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.matchers.JUnitMatchers.hasItem;
@@ -25,19 +26,19 @@ public class WhenFindingMissingNumbersInASequence {
 	@Test
 	public void oneNumberMissingInASequence() throws Exception {
 		Collection<Integer> missingNumbers = finder.missingNumbers(Arrays.asList(12, 13, 15));
-		assertThat(missingNumbers, hasItem(14));
+		assertEquals(missingNumbers, Arrays.asList(14));
 	}
 	
 	@Test
 	public void manyNumbersMissingInASequence() throws Exception {
 		Collection<Integer> missingNumbers = finder.missingNumbers(Arrays.asList(12, 13, 17));
-		assertThat(missingNumbers, hasItems(14, 15, 16));
+		assertEquals(missingNumbers, Arrays.asList(14, 15, 16));
 	}
 	
 	@Test
 	public void manyNumbersAcrossTwentiesAndThirties() throws Exception {
 		Collection<Integer> missingNumbers = finder.missingNumbers(Arrays.asList(27, 29, 34));
-		assertThat(missingNumbers, hasItems(28, 30, 31, 32, 33, 34));
+		assertEquals(missingNumbers, Arrays.asList(28, 30, 31, 32, 33));
 	}
 	
 	@Test

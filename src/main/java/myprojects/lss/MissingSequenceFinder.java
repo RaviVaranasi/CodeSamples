@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.PeekingIterator;
 
@@ -30,9 +29,10 @@ public class MissingSequenceFinder {
 			if(!iterator.hasNext())
 				continue;
 			Integer next = iterator.peek();
-			if(next - current > threshold || next < current)
+			int delta = next - current;
+			if(delta > threshold || next < current || delta == 1)
 				continue;
-			for(int i =1; i <= (next - current); i++)
+			for(int i =1; i <= delta -1 ; i++)
 				list.add(current + i);
 		}
 			
