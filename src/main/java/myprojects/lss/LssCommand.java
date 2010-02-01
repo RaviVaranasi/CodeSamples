@@ -3,6 +3,7 @@ package myprojects.lss;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import com.google.common.collect.HashMultimap;
@@ -24,7 +25,6 @@ public class LssCommand {
 	}
 
 	public HashMultimap<String, MatchedResult> execute() {
-		StringBuffer output = new StringBuffer();
 		LinkedList<String> workingSet = Lists.newLinkedList();
 		for(int i = 0; i < fileNames.length; i ++) {
 			workingSet.add(fileNames[i]);
@@ -49,9 +49,11 @@ public class LssCommand {
 		ArrayList<Integer> missingSequence = Lists.newArrayList();
 		Collection<MatchedResult> values = map.values();
 		for(MatchedResult each: values) {
-			missingSequence.add(each.getSequenceNumber());
+			if(each != null)				
+				missingSequence.add(each.getSequenceNumber());
 		}
-		
+		Collections.sort(missingSequence);
+		System.out.println(missingSequence);
 		return new  MissingSequenceFinder(5).missingNumbers(missingSequence);
 	}
 

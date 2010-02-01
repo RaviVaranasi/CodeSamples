@@ -27,7 +27,6 @@ public class SequenceMatcherPredicate {
 
 		Pattern numberPattern = compile("[0-9]+");
 		Matcher firstMatcher = numberPattern.matcher(first);
-		System.out.println(firstMatcher.groupCount());
 		Matcher secondMatcher = numberPattern.matcher(second);
 		int i = 0;
 		while (firstMatcher.find() && secondMatcher.find()) {

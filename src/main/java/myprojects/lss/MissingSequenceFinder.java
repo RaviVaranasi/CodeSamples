@@ -3,6 +3,8 @@ package myprojects.lss;
  * Finds missing sequences in a list
  */
 
+import static com.google.common.collect.Iterators.peekingIterator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +24,7 @@ public class MissingSequenceFinder {
 
 	public Collection<Integer> missingNumbers(List<Integer> sequence) {
 		ArrayList<Integer> list = Lists.newArrayList();
-		PeekingIterator<Integer> iterator = Iterators.peekingIterator(sequence.iterator());
+		PeekingIterator<Integer> iterator = peekingIterator(sequence.iterator());
 		while(iterator.hasNext()){
 			Integer current = iterator.next();
 			if(!iterator.hasNext())
