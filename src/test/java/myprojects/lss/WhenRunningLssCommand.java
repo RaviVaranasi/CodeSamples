@@ -1,14 +1,11 @@
 package myprojects.lss;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
-import myprojects.lss.LssCommand;
-import myprojects.lss.MatchedResult;
-
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers;
 
 import com.google.common.collect.HashMultimap;
 
@@ -32,7 +29,31 @@ public class WhenRunningLssCommand {
 		LssCommand lssCommand = new LssCommand(fileNames);
 		HashMultimap<String, MatchedResult> map = lssCommand.execute();
 		assertEquals(3, map.keySet().size());
-		assertThat(lssCommand.missingSequences(), JUnitMatchers.hasItems(122));
+		assertEquals(lssCommand.missingSequences(map), Arrays.asList(122));
+	}
+	
+	@Test
+	public void withNoSequences() throws Exception {
+		String[] fileNames = new String[] { "elem.info", "sd_fx29.0101.rgb", 
+				"info.xml"};
+		
+		LssCommand lssCommand = new LssCommand(fileNames);
+		HashMultimap<String, MatchedResult> map = lssCommand.execute();
+		assertEquals(3, map.keySet().size());
+		assertTrue(lssCommand.missingSequences(map).isEmpty());
+
+	}
+	
+	@Test
+	public void withJustOneSequences() throws Exception {
+		String[] fileNames = new String[] { "sd_fx29.0099.rgd", "sd_fx29.0101.rgb", 
+				"sd_fx29.0102.rgd"};
+		
+		LssCommand lssCommand = new LssCommand(fileNames);
+		HashMultimap<String, MatchedResult> map = lssCommand.execute();
+		assertEquals(1, map.keySet().size());
+		assertEquals(lssCommand.missingSequences(map), Arrays.asList(100));
+
 	}
 
 }
