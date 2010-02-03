@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -69,18 +71,28 @@ public class LssCommand {
 		StringBuffer formattedString = new StringBuffer();
 		for(String key: map.keySet()){
 			ArrayList<Integer> sequences = Lists.newArrayList();
-			Set<MatchedResult> values = map.get(key);
+			
+			Set<MatchedResult> values = new TreeSet<MatchedResult>(map.get(key));
 			formattedString.append(values.size());
 			formattedString.append(SINGLE_SPACE);
 			formattedString.append(key);
 			formattedString.append(SINGLE_SPACE);
+			if(values.size() > 1){
+				formattedString.append("(");
+				MatchedResult first = Iterables.get(values, 0);
+				MatchedResult last = Iterables.getLast(values);
+				formattedString.append(first.getSequenceNumber() + "-" + 
+							last.getSequenceNumber());
+				formattedString.append(")");
+
+			}
 			for(MatchedResult each: values) {
-				if(each != null)				
+				if(each != null)		
 					sequences.add(each.getSequenceNumber());
 			}
 			Collection<Integer> missingNumbers = missingSequenceFinder.missingNumbers(sequences);
 			if(!missingNumbers.isEmpty())
-				formattedString.append("MISSING SEQUENCES: ");
+				formattedString.append(" MISSING SEQUENCES: ");
 			for(Integer missingNumber: missingNumbers) {
 				formattedString.append(missingNumber);
 				formattedString.append(SINGLE_SPACE);

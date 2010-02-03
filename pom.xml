@@ -1,27 +1,83 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>myprojects</groupId>
-  <artifactId>sum</artifactId>
-  <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>sum</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-  	<dependency>
-  		<groupId>junit</groupId>
-  		<artifactId>junit</artifactId>
-  		<version>4.4</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.google.collections</groupId>
-  		<artifactId>google-collections</artifactId>
-  		<version>1.0</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>commons-lang</groupId>
-  		<artifactId>commons-lang</artifactId>
-  		<version>2.4</version>
-  	</dependency>
-  </dependencies>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>myprojects</groupId>
+	<artifactId>lss</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>sum</name>
+	<url>http://maven.apache.org</url>
+
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+	</dependencies>
+	<build>
+	<plugins>
+	<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+	
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<configuration>
+			<archive>
+				<manifest>
+					<mainClass>myprojects.lss.LssCommand</mainClass>
+				</manifest>
+			</archive>
+		</configuration>
+	</plugin>
+
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-shade-plugin</artifactId>
+		<version>1.2</version>
+		<executions>
+			<execution>
+				<phase>package</phase>
+				<goals>
+					<goal>shade</goal>
+				</goals>
+				<configuration>
+					<artifactSet>
+						<!-- Use this to in/exclude only specific dependencies -->
+						<includes>
+							<include>com.google.collections:google-collections</include>
+							<include>commons-lang:commons-lang</include>
+						</includes>
+					</artifactSet>
+					<transformers>
+						<transformer
+							implementation="org.apache.maven.plugins.shade.resource.ComponentsXmlResourceTransformer" />
+					</transformers>
+				</configuration>
+			</execution>
+		</executions>
+	</plugin>
+	
+	</plugins>
+	</build>
+	
 </project>

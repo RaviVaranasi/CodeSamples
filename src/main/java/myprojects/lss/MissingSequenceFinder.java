@@ -7,6 +7,7 @@ import static com.google.common.collect.Iterators.peekingIterator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -22,6 +23,7 @@ public class MissingSequenceFinder {
 	}
 
 	public Collection<Integer> missingNumbers(List<Integer> sequence) {
+		Collections.sort(sequence);
 		ArrayList<Integer> list = Lists.newArrayList();
 		PeekingIterator<Integer> iterator = peekingIterator(sequence.iterator());
 		while(iterator.hasNext()){
