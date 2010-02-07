@@ -46,7 +46,7 @@ public class WhenRunningLssCommand {
 	
 	@Test
 	public void withJustOneSequences() throws Exception {
-		String[] fileNames = new String[] { "sd_fx29.0099.rgd", "sd_fx29.0101.rgb", 
+		String[] fileNames = new String[] { "sd_fx29.0099.rgd", "sd_fx29.0101.rgd", 
 				"sd_fx29.0102.rgd"};
 		
 		LssCommand lssCommand = new LssCommand(fileNames);

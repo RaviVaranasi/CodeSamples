@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -51,7 +50,7 @@ public class LssCommand {
 			if(matches.isEmpty())
 				map.put(base, null);
 		}
-		
+		System.err.println(map);
 		return map;
 		
 	}
@@ -120,11 +119,14 @@ public class LssCommand {
 		}
 		File[] files = file.listFiles();
 		List<String> fileNameList = Lists.newArrayList();
+	
 		for(File each: files)
 			if(!each.getName().trim().equals(""))
 				fileNameList.add(each.getName());
 			
-		String[] fileNames = Iterables.toArray(fileNameList, String.class);
+//		String[] fileNames = Iterables.toArray(fileNameList, String.class);
+	    String[] fileNames=	new String[] {"alpha.txt", "file01_0041.rgb","file01_0043.rgb","file02_0045.rgb","file02_0047.rgb","file03_2.rgb","file03_info.txt",
+	    	"file01_0040.rgb","file01_0042.rgb","file02_0044.rgb","file02_0046.rgb","file03_1.rgb","file03_3.rgb"};
 		LssCommand lssCommand = new LssCommand(fileNames);
 		HashMultimap<String, MatchedResult> map = lssCommand.execute();
 		System.out.println(lssCommand.toString(map));

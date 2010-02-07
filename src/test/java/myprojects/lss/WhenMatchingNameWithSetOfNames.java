@@ -1,6 +1,7 @@
 package myprojects.lss;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -28,7 +29,7 @@ public class WhenMatchingNameWithSetOfNames {
 
 	@Test
 	public void showGroupedElements() throws Exception {
-		Collection<MatchedResult> matches = grouper.match("sd_fx29.0115.rgb", 
+		Collection<MatchedResult> matches = grouper.match("sd_fx29.0115.rgd", 
 				asList("sd_fx29.0116.rgd", "sd_fx29.0119.rgd", "sd_fx29.0120.rgd"));
 		assertEquals(4, matches.size());
 		Collection<Integer> actual = Collections2.transform(matches, new Function<MatchedResult, Integer>() {
@@ -42,7 +43,7 @@ public class WhenMatchingNameWithSetOfNames {
 	
 	@Test
 	public void showGroupElementsGreaterThan5() throws Exception {
-		Collection<MatchedResult> matches = grouper.match("sd_fx29.0115.rgb", 
+		Collection<MatchedResult> matches = grouper.match("sd_fx29.0115.rgd", 
 				asList("sd_fx29.0116.rgd", "sd_fx29.0119.rgd", "sd_fx29.0120.rgd", "sd_fx29.0121.rgd",
 						"sd_fx29.0122.rgd", "sd_fx29.0123.rgd"));
 		assertEquals(7, matches.size());
@@ -69,6 +70,15 @@ public class WhenMatchingNameWithSetOfNames {
 		Collection<MatchedResult> matches = grouper.match("a123.rgb", 
 				asList("b.rgd", "24c.rgd", "a2130_123.rgd"));	
 		assertTrue(matches.isEmpty());
+	}
+	
+	@Test
+	public void related() throws Exception {
+		Collection<MatchedResult> matches = grouper.match("file03_1.rgb", 
+				asList("file03_2.rgb", "file03_0.rgb", "file03_3.rgb"));	
+		assertEquals(4, matches.size());
+
+		
 	}
 	
 	

@@ -44,7 +44,7 @@ public class WhenFindingMissingNumbersInASequence {
 	@Test
 	public void numbersLargerThanThreshold() throws Exception {
 		Collection<Integer> missingNumbers = finder.missingNumbers(Arrays.asList(27, 34));
-		assertTrue(missingNumbers.isEmpty());
+		assertEquals(missingNumbers, Arrays.asList(28, 29, 30, 31, 32, 33));
 	}
 
 

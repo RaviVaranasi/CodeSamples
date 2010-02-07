@@ -32,7 +32,7 @@ public class MissingSequenceFinder {
 				continue;
 			Integer next = iterator.peek();
 			int delta = next - current;
-			if(delta > threshold || next < current || delta == 1)
+			if(delta > 100 || next < current || delta == 1)
 				continue;
 			for(int i =1; i <= delta -1 ; i++)
 				list.add(current + i);

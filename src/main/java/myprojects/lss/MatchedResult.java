@@ -6,6 +6,7 @@ package myprojects.lss;
 public class MatchedResult implements Comparable<MatchedResult>{
 	private final String name;
 	private final Integer sequenceNumber;
+	
 
 	public MatchedResult(String name, Integer sequenceNumber) {
 		this.name = name;

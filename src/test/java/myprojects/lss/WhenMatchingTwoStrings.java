@@ -35,7 +35,7 @@ public class WhenMatchingTwoStrings {
 	
 	@Test
 	public void withAlphaNumericDifferentButIdenticalNumbers() throws Exception {
-		assertFalse(predicate.isMatch("A0.txt", "B0.txt"));
+		assertFalse(predicate.isMatch("A01.txt", "A02.rgd"));
 	}
 	
 	@Test
@@ -43,10 +43,6 @@ public class WhenMatchingTwoStrings {
 		assertTrue(predicate.isMatch("sd_fx29.0119.rgb", "sd_fx29.0124.rgb"));
 	}
 	
-	@Test
-	public void withSkippedNumbersGreaterThanThreshold() throws Exception {
-		assertFalse(predicate.isMatch("sd_fx29.0119.rgb", "sd_fx29.0129.rgb"));
-	}
 	
 	@Test
 	public void withSequentialNumbersFollowedByIdenticalNumbers() throws Exception {
@@ -56,6 +52,22 @@ public class WhenMatchingTwoStrings {
 	@Test
 	public void withTwoStringWithoutNumbers() throws Exception {
 		assertFalse(predicate.isMatch("A.txt", "B.txt"));
+	}
+	
+	@Test
+	public void withTwoStringWithASequenceButDifferentStrings() throws Exception {
+		assertFalse(predicate.isMatch("file01_0043.rgb", "file02_0044.rgb"));
+	}
+	
+	@Test
+	public void withTwoStringsOfSameLengthButDifferentExtensions() throws Exception {
+		assertFalse(predicate.isMatch("A01.txt", "B01.txa"));
+	}
+	
+	
+	@Test
+	public void withTwoRelatedStrings() throws Exception {
+		assertTrue(predicate.isMatch("file03_1.rgb", "file03_3.rgb"));
 	}
 
 }
